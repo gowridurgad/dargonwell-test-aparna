@@ -17,9 +17,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Set up latest Maven
-        uses: s4u/maven-settings-action@v2
-        with:
-          maven-version: '3.9.4'  # Use the latest available version
+      - name: Remove existing Maven
+        run: sudo apt-get remove -y maven
+
+      - name: Install latest Maven
+        run: |
+          MAVEN_VERSION=3.9.4
+          wget https://downloads.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
+          tar xzvf apache-maven-$MAVEN_VERSION-bin.tar.gz
+          sudo mv apache-maven-$MAVEN_VERSION /opt/maven
+          sudo ln -s /opt/maven/bin/mvn /usr/bin/mvn
 
       - run: mvn --version
