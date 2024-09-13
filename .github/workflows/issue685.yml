@@ -22,7 +22,7 @@ jobs:
 
       - name: Install latest Maven
         run: |
-          MAVEN_VERSION=3.9.4
+          MAVEN_VERSION=3.9.9
           wget https://downloads.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
           tar xzvf apache-maven-$MAVEN_VERSION-bin.tar.gz
           sudo mv apache-maven-$MAVEN_VERSION /opt/maven
