@@ -1,9 +1,9 @@
-name : mavenversion-issue685
+name: mavenversion-issue685
 
 on:
- workflow_dispatch:
+  workflow_dispatch:
 
- jobs:
+jobs:
   build:
     runs-on: ubuntu-latest
 
@@ -16,4 +16,5 @@ on:
         with:
           java-version: '17'
           distribution: 'temurin'
+
       - run: mvn --version
