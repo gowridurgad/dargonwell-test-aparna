@@ -1,4 +1,4 @@
-name: mavenversion-issue685
+name: Build with JDK 17 and latest Maven
 
 on:
   workflow_dispatch:
@@ -17,4 +17,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - run: mvn --version
+      - name: Install latest Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven
+          mvn --version
