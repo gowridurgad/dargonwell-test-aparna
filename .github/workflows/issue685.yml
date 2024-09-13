@@ -21,4 +21,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y maven
-          mvn --version
+
+      - name: maven version
+        run: mvn --version
