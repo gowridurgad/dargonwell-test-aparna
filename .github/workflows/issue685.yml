@@ -1,25 +1,30 @@
-name: Setup Java and Maven
+name: Build with JDK 17 and latest Maven
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Install latest Maven
+        run: |
+          MAVEN_VERSION=3.9.9
+          wget https://downloads.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
+          tar xzvf apache-maven-$MAVEN_VERSION-bin.tar.gz
+          sudo mv apache-maven-$MAVEN_VERSION /opt/maven
+          sudo rm -f /usr/bin/mvn  # Remove existing symbolic link if it exists
+          sudo ln -s /opt/maven/bin/mvn /usr/bin/mvn  # Create new symbolic link
+
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Install Maven
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y maven
-
-      - name: Verify Maven version
-        run: mvn --version
+      
+      - run: mvn --version
