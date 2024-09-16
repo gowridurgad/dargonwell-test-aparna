@@ -17,9 +17,9 @@ jobs:
           java-version: '17'
 
       - name: Set up Maven
-        uses: eskatos/setup-maven@v3
+        uses: setup-maven@v1
         with:
-          maven-version: '3.9.9' # Specify the desired Maven version
+          maven-version: '3.9.6' # Specify the desired Maven version
 
       - name: Verify Maven version
         run: mvn --version
